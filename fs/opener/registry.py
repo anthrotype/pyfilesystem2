@@ -10,7 +10,10 @@ import collections
 import contextlib
 import typing
 
-import pkg_resources
+try:
+    import pkg_resources
+except Exception:
+    pkg_resources = None
 
 from .base import Opener
 from .errors import UnsupportedProtocol, EntryPointError
@@ -83,7 +86,7 @@ class Registry(object):
         """
 
         _protocols = list(self._protocols)
-        if self.load_extern:
+        if self.load_extern and pkg_resources:
             _protocols.extend(
                 entry_point.name
                 for entry_point in pkg_resources.iter_entry_points("fs.opener")
@@ -111,7 +114,7 @@ class Registry(object):
         """
         protocol = protocol or self.default_opener
 
-        if self.load_extern:
+        if self.load_extern and pkg_resources:
             entry_point = next(
                 pkg_resources.iter_entry_points("fs.opener", protocol), None
             )
@@ -281,4 +284,4 @@ class Registry(object):
                 _fs.close()
 
 
-registry = Registry(load_extern=True)
+registry = Registry(load_extern=pkg_resources is not None)

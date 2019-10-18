@@ -26,7 +26,7 @@ from fs import glob
 from fs.opener import open_fs
 from fs.subfs import ClosingSubFS, SubFS
 
-import pytz
+from dateutil.tz import UTC
 import six
 from six import text_type
 
@@ -1127,9 +1127,9 @@ class FSTestCases(object):
         info = self.fs.getinfo("birthday.txt", namespaces=["details"])
         writeable = info.get("details", "_write", [])
         if "accessed" in writeable:
-            self.assertEqual(info.accessed, datetime(2016, 7, 5, tzinfo=pytz.UTC))
+            self.assertEqual(info.accessed, datetime(2016, 7, 5, tzinfo=UTC))
         if "modified" in writeable:
-            self.assertEqual(info.modified, datetime(2016, 7, 5, tzinfo=pytz.UTC))
+            self.assertEqual(info.modified, datetime(2016, 7, 5, tzinfo=UTC))
 
     def test_touch(self):
         self.fs.touch("new.txt")
@@ -1137,7 +1137,7 @@ class FSTestCases(object):
         self.fs.settimes("new.txt", datetime(2016, 7, 5))
         info = self.fs.getinfo("new.txt", namespaces=["details"])
         if info.is_writeable("details", "accessed"):
-            self.assertEqual(info.accessed, datetime(2016, 7, 5, tzinfo=pytz.UTC))
+            self.assertEqual(info.accessed, datetime(2016, 7, 5, tzinfo=UTC))
             now = time.time()
             self.fs.touch("new.txt")
             accessed = self.fs.getinfo("new.txt", namespaces=["details"]).raw[

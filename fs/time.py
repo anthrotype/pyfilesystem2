@@ -6,12 +6,14 @@ from __future__ import unicode_literals
 
 from calendar import timegm
 from datetime import datetime
-from pytz import UTC, timezone
+from dateutil.tz import UTC
 
 
 utcfromtimestamp = datetime.utcfromtimestamp
-utclocalize = UTC.localize
-GMT = timezone("GMT")
+
+
+def utclocalize(d):
+    return d.replace(tzinfo=UTC)
 
 
 def datetime_to_epoch(d):

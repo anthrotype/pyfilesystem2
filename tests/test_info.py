@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import datetime
 import unittest
 
-import pytz
+from dateutil.tz import UTC
 
 from fs.enums import ResourceType
 from fs.info import Info
@@ -72,10 +72,10 @@ class TestInfo(unittest.TestCase):
 
     def test_details(self):
         dates = [
-            datetime.datetime(2016, 7, 5, tzinfo=pytz.UTC),
-            datetime.datetime(2016, 7, 6, tzinfo=pytz.UTC),
-            datetime.datetime(2016, 7, 7, tzinfo=pytz.UTC),
-            datetime.datetime(2016, 7, 8, tzinfo=pytz.UTC),
+            datetime.datetime(2016, 7, 5, tzinfo=UTC),
+            datetime.datetime(2016, 7, 6, tzinfo=UTC),
+            datetime.datetime(2016, 7, 7, tzinfo=UTC),
+            datetime.datetime(2016, 7, 8, tzinfo=UTC),
         ]
         epochs = [datetime_to_epoch(d) for d in dates]
 

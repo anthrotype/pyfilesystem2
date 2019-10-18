@@ -7,7 +7,7 @@ import datetime
 import re
 import time
 
-from pytz import UTC
+from dateutil.tz import UTC
 
 from .enums import ResourceType
 from .permissions import Permissions

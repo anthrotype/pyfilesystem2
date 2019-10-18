@@ -3,7 +3,10 @@
 """
 
 # Declare fs.opener as a namespace package
-__import__("pkg_resources").declare_namespace(__name__)
+try:
+    __import__("pkg_resources").declare_namespace(__name__)
+except Exception:
+    pass
 
 # Import objects into fs.opener namespace
 from .base import Opener

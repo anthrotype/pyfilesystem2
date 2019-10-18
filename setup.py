@@ -22,7 +22,7 @@ CLASSIFIERS = [
     "Topic :: System :: Filesystems",
 ]
 
-REQUIREMENTS = ["appdirs~=1.4.3", "pytz", "setuptools", "six~=1.10"]
+REQUIREMENTS = ["appdirs~=1.4.3", "python-dateutil", "six~=1.10"]
 
 setup(
     author="Will McGugan",

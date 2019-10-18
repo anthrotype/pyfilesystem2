@@ -1,7 +1,11 @@
 """Python filesystem abstraction layer.
 """
 
-__import__("pkg_resources").declare_namespace(__name__)
+try:
+    __import__("pkg_resources").declare_namespace(__name__)
+except Exception as e:
+    import warnings
+    warnings.warn(str(e), UserWarning)
 
 from ._version import __version__
 from .enums import ResourceType, Seek
